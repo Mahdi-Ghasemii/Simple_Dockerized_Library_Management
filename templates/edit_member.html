@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block body %}
+<br>
+<h1>Edit Member</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form method="POST" action="">
+    <div class="form-group">
+        {{render_field(form.name, class_="form-control", value=member[1])}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.lastname, class_="form-control", value=member[2])}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.username, class_="form-control", value=member[3])}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.password, class_="form-control", value=member[4])}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.phonenumber, class_="form-control", value=member[5])}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.address, class_="form-control", value=member[6])}}
+    </div>
+    <br><br>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
+</form>
+{% endblock %}
