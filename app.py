@@ -4,7 +4,7 @@ from wtforms import Form, validators, StringField, FloatField, IntegerField, Dat
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_HOST'] = 'host.docker.internal'
 app.config['MYSQL_USER'] = 'mahdi'
 app.config['MYSQL_PASSWORD'] = '1234'
 app.config['MYSQL_DB'] = 'LibraryApp'
@@ -23,7 +23,7 @@ if __name__ == '__main__':
    mysql.init_app(app)
    app.register_blueprint(book_app)
    app.register_blueprint(user_app)
-   app.run(debug=True, host='localhost' , port=5001)
+   app.run(debug=True, host='0.0.0.0' , port=5001)
 
 
 
