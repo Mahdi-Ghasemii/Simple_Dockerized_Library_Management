@@ -13,7 +13,7 @@ mysql = MySQL()
 
 @app.route('/')
 def landing():
-   return render_template("home.html")
+   return render_template("index.html")
 
 
 if __name__ == '__main__':
@@ -23,7 +23,7 @@ if __name__ == '__main__':
    mysql.init_app(app)
    app.register_blueprint(book_app)
    app.register_blueprint(user_app)
-   app.run(debug=True, host='0.0.0.0' , port=5001)
+   app.run(debug=True, host='0.0.0.0' , port=4000)
 
 
 
