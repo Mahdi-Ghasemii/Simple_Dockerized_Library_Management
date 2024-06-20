@@ -1,17 +1,20 @@
 from flask import Flask
 from flask_mysqldb import MySQL
+import os
 
 app = Flask(__name__)
 
+dirname = os.path.dirname(__file__)
 
-app.config['MYSQL_HOST'] = 'host.docker.internal'
+
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'mahdi'
 app.config['MYSQL_PASSWORD'] = '1234'
 app.config['HOST_IP'] = '0.0.0.0'
-# app.config.setdefault("MYSQL_UNIX_PORT")
 
 with app.app_context():
-   f = open("./utils/script.sql", "r")
+   filename = os.path.join(dirname, 'script.sql')
+   f = open(filename, "r")
    query = f.read()
    mysql = MySQL(app)
    cursor = mysql.connection.cursor()
