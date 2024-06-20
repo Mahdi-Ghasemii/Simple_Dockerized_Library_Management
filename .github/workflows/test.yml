@@ -1,0 +1,26 @@
+name: Workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  release:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        # python-version : [3.8]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Docker Compose
+        run: docker compose up .
+      
+      - name: Run Tests
+        run: python3 test.py
