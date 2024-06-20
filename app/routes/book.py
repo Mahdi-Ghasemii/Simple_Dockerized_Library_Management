@@ -12,8 +12,11 @@ def list_books_route():
 def add_book_route():
     if request.method == "POST":
       form = BookForm(request.form)
-      insert_book(form.title.data,form.numPages.data,form.author.data)
-      return redirect(url_for("book.list_books_route"))
+      try: 
+        insert_book(form.title.data,form.numPages.data,form.author.data)
+        return redirect(url_for("book.list_books_route"))
+      except Exception as e:
+         return render_template("add_book.html" , form=form , error="Error : " + str(e)) , 400
     elif request.method == "GET":
       form = BookForm()
       return render_template("add_book.html" , form=form)
@@ -29,12 +32,15 @@ def delete_book_route():
 @book_app.route('/edit_book/<id>' , methods={"GET" , "POST"})
 def edit_book_route(id):
     cursor = mysql.connection.cursor()
+    [bookform , book] = select_book_using_id(id)
+    print(book)
     if request.method == "POST":
       form = BookForm(request.form)
-      update_book(form.title.data,form.numPages.data,form.author.data)
-      return redirect(url_for("list_books_route"))
-
+      try: 
+        update_book(form.title.data,form.numPages.data,form.author.data,id)
+        return redirect(url_for("list_books_route"))
+      except Exception as e:
+         return render_template("edit_book.html" , form=form , error="Error : " + str(e)) , 400
     elif request.method == "GET":
-      [bookform , book] = select_book_using_id(id)
       return render_template("edit_book.html" , form=bookform , book=book)
 

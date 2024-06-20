@@ -1,13 +1,13 @@
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, IntegerField
+from wtforms import Form, validators , StringField, IntegerField
 
 from app import mysql
 
 class BookForm(Form):
-   id = IntegerField("Id")
-   title = StringField("Title")
-   numPages = StringField("NumPages")
-   author = StringField("Author")  
+   id = IntegerField("Id" , [validators.NumberRange(min=1)])
+   title = StringField("Title" , [validators.Length(min=3 , max=255)])
+   numPages = IntegerField("NumPages" , [validators.NumberRange(min=1)])
+   author = StringField("Author" , [validators.Length(min=3 , max=1000)])  
 
 
 def select_all_books():
@@ -53,13 +53,13 @@ def update_book(title, numPages, Author, id):
 
 
 class MemberForm(Form):
-   id = IntegerField("Id")
-   name = StringField("Name")
-   lastname = StringField("LastName")
-   username = StringField("UserName")
-   password = StringField("Password")
-   phonenumber = StringField("PhoneNumber")
-   address = StringField("Address")
+   id = IntegerField("Id", [validators.NumberRange(min=1)])
+   name = StringField("Name", [validators.Length(min=3)])
+   lastname = StringField("LastName", [validators.Length(min=3)])
+   username = StringField("UserName", [validators.Length(min=3)])
+   password = StringField("Password", [validators.Length(min=8)])
+   phonenumber = IntegerField("PhoneNumber", [validators.Length(min=8)])
+   address = StringField("Address", [validators.Length(min=5 , max=1000)])
 
 def select_all_members():
     cursor = mysql.connection.cursor()
