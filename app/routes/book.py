@@ -29,6 +29,7 @@ def delete_book_route():
     return redirect(url_for("list_books_route"))
 
 
+
 @book_app.route('/edit_book/<id>' , methods={"GET" , "POST"})
 def edit_book_route(id):
     cursor = mysql.connection.cursor()
