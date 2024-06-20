@@ -21,7 +21,6 @@ def add_member_route():
     elif request.method == "GET":
       form = MemberForm()
       return render_template("add_member.html" , form=form)
-    
 
 # @user_app.route('/delete_member' , defaults={'id':None}, methods={"POST"})
 @user_app.route('/delete_member' , methods={"POST"})
