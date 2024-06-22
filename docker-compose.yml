@@ -11,7 +11,7 @@ services:
       - ./app:/app
     depends_on:
           mysql:
-            condition: service_started
+            condition: service_healthy
     
 
   mysql:
@@ -23,7 +23,7 @@ services:
       MYSQL_DATABASE: "LibraryApp"
       MYSQL_PASSWORD: "1234"
     healthcheck:
-        test: "mysqladmin ping -h localhost -d"
+        test: "mysqladmin ping -h localhost"
         interval: 10s
         timeout: 20s
         retries: 10

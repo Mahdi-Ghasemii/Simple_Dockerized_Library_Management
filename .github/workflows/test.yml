@@ -27,6 +27,16 @@ jobs:
         run: |
           docker-compose build
           docker compose up -d
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/library_app:latest
+
+      - name: Log out from DockerHub
+        run: docker logout
       
       - name: Run Tests
         run: docker-compose exec -t flask python3 test.py 
