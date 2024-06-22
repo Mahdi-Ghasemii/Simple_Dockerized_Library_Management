@@ -1,18 +1,39 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  
   flask:
     build:
       context: ./app
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - ./app:/app
+    depends_on:
+          mysql:
+            condition: service_started
+    
 
-  
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: "mahdi"
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DATABASE: "LibraryApp"
+      MYSQL_PASSWORD: "1234"
+    healthcheck:
+        test: "mysqladmin ping -h localhost -d"
+        interval: 10s
+        timeout: 20s
+        retries: 10
+        start_period: 1s
+      
   nginx:
     build:
       context: ./nginx
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "3000:3000"
     depends_on:

@@ -4,10 +4,12 @@ from wtforms import Form, validators, StringField, FloatField, IntegerField, Dat
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'host.docker.internal'
+app.config['MYSQL_HOST'] = 'mysql'
 app.config['MYSQL_USER'] = 'mahdi'
 app.config['MYSQL_PASSWORD'] = '1234'
 app.config['MYSQL_DB'] = 'LibraryApp'
+app.config['MYSQL_PORT'] = 3306
+
 
 mysql = MySQL()
 

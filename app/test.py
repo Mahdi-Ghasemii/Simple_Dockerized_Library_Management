@@ -8,7 +8,7 @@ class TestStringMethods(unittest.TestCase):
 
 
     def setUp(self):
-        app.config['MYSQL_HOST'] = 'host.docker.internal'
+        app.config['MYSQL_HOST'] = 'mysql'
         app.config['MYSQL_USER'] = 'mahdi'
         app.config['MYSQL_PASSWORD'] = '1234'
         app.config['DEBUG'] = True
