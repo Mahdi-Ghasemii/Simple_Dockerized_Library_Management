@@ -6,6 +6,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
+    image: mahdi2359/testproj_flask
     restart: always
     volumes:
       - ./app:/app
@@ -33,6 +34,7 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
+    image: mahdi2359/testproj_nginx
     restart: always
     ports:
       - "3000:3000"

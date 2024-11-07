@@ -28,12 +28,11 @@ jobs:
           docker-compose build
           docker compose up -d
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/library_app:latest
+      - name: Tag Docker Image
+        run: docker tag mahdi2359/testproj_flask mahdi2359/testproj_flask:latest
+
+      - name: Push Docker Image to Docker Hub
+        run: docker push mahdi2359/testproj_flask:latest
 
       - name: Log out from DockerHub
         run: docker logout
