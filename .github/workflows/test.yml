@@ -34,10 +34,14 @@ jobs:
           docker compose up -d
 
       - name: Tag Docker Image
-        run: docker tag mahdi2359/testproj_flask mahdi2359/testproj_flask:latest
+        run: |
+        docker tag mahdi2359/testproj_flask mahdi2359/testproj_flask:latest
+        docker tag mahdi2359/testproj_nginx mahdi2359/testproj_nginx:latest
 
       - name: Push Docker Image to Docker Hub
-        run: docker push mahdi2359/testproj_flask:latest
+        run: |
+        docker push mahdi2359/testproj_flask:latest
+        docker push mahdi2359/testproj_nginx:latest
 
       - name: Log out from DockerHub
         run: docker logout
