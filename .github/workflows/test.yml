@@ -8,7 +8,7 @@ on:
   release:
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -27,18 +27,35 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Docker build image
         run: |
           docker-compose build
           docker compose up -d
 
-      - name: Tag Docker Image
+      - name: Tag Latest Docker Images
         run: |
           docker tag mahdi2359/testproj_flask mahdi2359/testproj_flask:latest
           docker tag mahdi2359/testproj_nginx mahdi2359/testproj_nginx:latest
 
+      - name: Tag Images with Git SHA
+        run: |
+          docker tag mahdi2359/testproj_flask mahdi2359/testproj_flask:${{ github.sha }}
+          docker tag mahdi2359/testproj_nginx mahdi2359/testproj_nginx:${{ github.sha }}
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:    
       - name: Push Docker Image to Docker Hub
+        run: |
+          docker push mahdi2359/testproj_flask:latest
+          docker push mahdi2359/testproj_nginx:latest
+          docker push mahdi2359/testproj_flask:${{ github.sha }}
+          docker push mahdi2359/testproj_nginx:${{ github.sha }}
+
+      - name: Push Image  to Docker Hub
         run: |
           docker push mahdi2359/testproj_flask:latest
           docker push mahdi2359/testproj_nginx:latest
