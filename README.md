@@ -1,7 +1,5 @@
 # Simple_Dockerized_Library_Management
 
----
-
 This project is a Simple Dockerized Library Management System that includes a backend, frontend, and database. it is just for working with tools like docker , nginx , flask and someother tools ...
 
 ---
